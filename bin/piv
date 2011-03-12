@@ -27,10 +27,18 @@ module Piv
   end
 
   def generate_class path
+    generate_ruby 'class', *path
+  end
+
+  def generate_module path
+    generate_ruby 'class', *path
+  end
+private
+  def generate_ruby thing, *path
     name = path.pop
     directory 'lib', *path do |dir|
       dir.file "#{name}.rb", <<EOF
-class #{classify name}
+#{thing} #{classify name}
 end
 EOF
     end
@@ -42,7 +50,7 @@ end
 EOF
     end
   end
-private
+
   def classify string
     string.split('_').map {|w| w.capitalize}.join
   end
