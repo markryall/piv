@@ -11,6 +11,14 @@ module Piv::Ruby
     system "git init" unless File.exist? '.git'
   end
 
+  def generate_declass names
+    degenerate_ruby 'class', names
+  end
+
+  def generate_demodule names
+    degenerate_ruby 'module', names
+  end
+
   def generate_class names
     generate_ruby 'class', names
   end
@@ -19,6 +27,11 @@ module Piv::Ruby
     generate_ruby 'module', names
   end
 private
+  def degenerate_ruby thing, names
+    rm "lib/#{names.join '/'}.rb"
+    rm "spec/#{names.join '/'}_spec.rb"
+  end
+
   def generate_ruby thing, names
     name, dirs = names.last, names.slice(0...-1)
     directory ['lib', *dirs] do |dir|

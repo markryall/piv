@@ -1,11 +1,11 @@
 class String
   def classify
-    self.split('_').map {|w| w.capitalize}.join
+    self.split('_').map(&:capitalize).join
   end
 end
 
 class Array
   def classify
-    self.map {|w| classify_one w}.join('::')
+    self.map.map(&:classify).join('::')
   end
 end
