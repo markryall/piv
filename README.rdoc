@@ -9,7 +9,7 @@ a simple and extensible command line file generator
 
 == installation
 
-at this stage, you need to clone the repository and put the bin directory on the path.  i'll turn this into a gem as soon as piv can generate a gemspec.
+  gem install piv
 
 == usage
 

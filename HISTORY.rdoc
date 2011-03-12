@@ -1,1 +1,7 @@
+= 0.0.1
 
+Early version that does the absolute minimum:
+
+* creates a ruby project skeleton
+* creates classes and modules (with associated spec files)
+* creates a gemspec
