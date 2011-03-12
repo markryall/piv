@@ -3,27 +3,24 @@ require 'piv'
 module Piv::Ruby
   include Piv
 
-  def generate_project
-    touch '.gitignore'
+  def generate_init *ignored
     directory 'lib'
     directory 'spec'
-
-    system "git init" unless File.exist? '.git'
   end
 
-  def generate_declass names
+  def generate_declass *names
     degenerate_ruby 'class', names
   end
 
-  def generate_demodule names
+  def generate_demodule *names
     degenerate_ruby 'module', names
   end
 
-  def generate_class names
+  def generate_class *names
     generate_ruby 'class', names
   end
 
-  def generate_module names
+  def generate_module *names
     generate_ruby 'module', names
   end
 private
