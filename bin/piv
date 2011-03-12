@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby -wKU
+
+require 'fileutils'
+
+include FileUtils
+
+touch '.gitignore'
+mkdir_p 'bin'
+mkdir_p 'lib'
+mkdir_p 'spec'
+system "git init" unless File.exist? '.git'
+system "git add ."
+system "git commit -m \"first commit\""
