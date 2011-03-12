@@ -29,13 +29,9 @@ this will create a Foo::Bar::Baz class, an associated spec and open both in a te
 
 this will create a module instead of a class and a spec and open both in a text editor
 
-  piv declass foo bar baz
+  piv destroy foo bar baz
 
-this will destroy the Foo::Bar::Baz class (and any associated files)
-
-  piv demodule foo bar baz
-
-this will destroy the Foo::Bar::Baz module (and any associated files)
+this will destroy Foo::Bar::Baz (and any associated files)
 
 == future plans
 
