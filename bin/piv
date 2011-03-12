@@ -2,12 +2,59 @@
 
 require 'fileutils'
 
-include FileUtils
+module Piv
+  include FileUtils
 
-touch '.gitignore'
-mkdir_p 'bin'
-mkdir_p 'lib'
-mkdir_p 'spec'
-system "git init" unless File.exist? '.git'
-system "git add ."
-system "git commit -m \"first commit\""
+  class Directory
+    def initialize path
+      @path = path
+    end
+
+    def file path, content
+      File.open File.join(@path,path),'w' do |f|
+        f.puts content
+      end
+    end
+  end
+
+  def generate_project comment
+    touch '.gitignore'
+    directory 'lib'
+    directory 'spec'
+    system "git init" unless File.exist? '.git'
+    system "git add ."
+    system "git commit -m \"#{comment}\""    
+  end
+
+  def generate_class path
+    name = path.pop
+    directory 'lib', *path do |dir|
+      dir.file "#{name}.rb", <<EOF
+class #{classify name}
+end
+EOF
+    end
+    directory 'spec', *path do |dir|
+      dir.file "#{name}_spec.rb", <<EOF
+describe #{classify name}
+  it 'should ...'
+end
+EOF
+    end
+  end
+private
+  def classify string
+    string.split('_').map {|w| w.capitalize}.join
+  end
+
+  def directory *path
+    full_path = File.join(*path)
+    mkdir_p File.join full_path
+    yield Directory.new(*path) if block_given?
+  end
+end
+
+include Piv
+
+method_name = "generate_#{ARGV.shift}"
+self.send method_name, ARGV if respond_to? method_name
