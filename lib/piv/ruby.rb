@@ -6,6 +6,7 @@ module Piv::Ruby
   def generate_init *ignored
     directory 'lib'
     directory 'spec'
+    file '.gemtest'
     file 'Rakefile'
     file 'Gemfile'
     file 'README.rdoc'
@@ -24,6 +25,29 @@ module Piv::Ruby
 
   def generate_module *names
     generate_ruby 'module', names
+  end
+
+  def generate_gem name
+    file 'gemspec', %{
+Gem::Specification.new do |spec|
+  spec.name = '#{name}'
+  spec.version = '0.0.1'
+  spec.summary = 'SUMMARY'
+  spec.description = <<-EOF
+DESCRIPTION
+EOF
+  spec.authors << 'YOUR NAME'
+  spec.email = 'YOUR EMAIL'
+  spec.homepage = 'http://HOMEPAGE'
+  spec.files = Dir['lib/**/*'] + Dir['spec/**/*'] + Dir['bin/*'] + ['README.rdoc', 'MIT-LICENSE', 'HISTORY.rdoc', 'Rakefile', '.gemtest']
+  spec.executables << 'EXECUTABLE'
+
+  spec.add_development_dependency 'rake', '~>0.8'
+  spec.add_development_dependency 'gemesis', '~>0'
+  spec.add_development_dependency 'rspec', '~>2'
+end
+}
+
   end
 private
   def generate_ruby thing, names
