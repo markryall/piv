@@ -1,0 +1,2 @@
+class Piv::Directory
+end
