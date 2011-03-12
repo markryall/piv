@@ -1,8 +1,13 @@
 #!/usr/bin/env ruby -wKU
 
 $: << File.dirname(__FILE__)+'/../lib'
-require 'piv'
-include Piv
+
+require 'yaml'
+
+config = YAML.load_file '.piv'
+
+require 'piv/'+config['flavour']
+include Piv.const_get config['flavour'].classify
 
 method_name = "generate_#{ARGV.shift}"
 self.send method_name, ARGV if respond_to? method_name
