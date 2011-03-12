@@ -6,6 +6,11 @@ module Piv::Ruby
   def generate_init *ignored
     directory 'lib'
     directory 'spec'
+    file 'Rakefile'
+    file 'Gemfile'
+    file 'README.rdoc'
+    file 'HISTORY.rdoc'
+    file 'MIT-LICENSE', license
   end
 
   def generate_declass *names

@@ -1,0 +1,45 @@
+= piv
+
+a simple and extensible command line file generator
+
+== rationale
+
+* command line tools are almost always faster than any gui or web interface
+* the idea of using a code generator to generate as much of itself as possible is appealing
+
+== installation
+
+at this stage, you need to clone the repository and put the bin directory on the path.  i'll turn this into a gem as soon as piv can generate a gemspec.
+
+== usage
+
+  piv ruby foo
+
+this will create a foo ruby project together with the standard folders and files that i'd usually create for a ruby project
+
+== ruby flavour
+
+once you've generated a ruby project you can use various generators
+
+  piv class foo bar baz
+
+this will create a Foo::Bar::Baz class, an associated spec and open both in a text editor (hardcoded to sublime text 2 at the moment)
+
+  piv module foo bar baz
+
+this will create a module instead of a class and a spec and open both in a text editor
+
+  piv declass foo bar baz
+
+this will destroy the Foo::Bar::Baz class (and any associated files)
+
+  piv demodule foo bar baz
+
+this will destroy the Foo::Bar::Baz module (and any associated files)
+
+== future plans
+
+* add gem related commands for ruby flavour
+* add other flavours (clojure? python? make up a whole new language?)
+* editor should be configurable
+* write some damn specs
