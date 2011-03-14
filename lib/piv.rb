@@ -14,6 +14,7 @@ module Piv
       extend Piv.const_get flavour.classify
       generate_init name if respond_to? :generate_init
     end
+    system "subl #{name}"
   end
 
   def directory path
