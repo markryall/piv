@@ -4,7 +4,7 @@ module Piv::Piv
   include Piv::Ruby
 
   def init_piv name
-    init_ruby
+    init_ruby name
     directory 'lib/piv' do
       file "#{name}.rb", <<EOF
 require 'piv'
@@ -17,6 +17,8 @@ module Piv::#{name.classify}
 end
 EOF
     end
-    directory 'spec/piv' { file "#{name}_spec.rb" }
+    directory 'spec/piv' do
+      file "#{name}_spec.rb"
+    end
   end
 end
