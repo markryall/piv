@@ -12,7 +12,7 @@ module Piv
       system 'git init' unless File.exist? '.git'
       require 'piv/'+flavour
       extend Piv.const_get flavour.classify
-      generate_init if respond_to? :generate_init
+      generate_init name if respond_to? :generate_init
     end
   end
 

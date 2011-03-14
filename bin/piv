@@ -8,6 +8,7 @@ unless File.exist? '.piv'
   require 'piv'
   include Piv
   generate_project ARGV.shift, ARGV.shift
+  exit
 end
 
 config = YAML.load_file '.piv'
