@@ -1,9 +1,24 @@
 require 'fileutils'
 
-module Piv
-  require 'piv/monkey_patching'
+class String
+  def classify
+    self.split('_').map(&:capitalize).join
+  end
+end
 
+class Array
+  def classify
+    self.map(&:classify).join('::')
+  end
+end
+
+module Piv
   include FileUtils
+
+  def edit path
+    editor = ENV['PIV_EDITOR'] || 'subl'
+    system "#{editor} #{path}"
+  end
 
   def generate_project flavour, name
     directory name do |dir|
@@ -14,7 +29,7 @@ module Piv
       extend Piv.const_get flavour.classify
       generate_init name if respond_to? :generate_init
     end
-    system "subl #{name}"
+    edit name
   end
 
   def directory path
@@ -29,7 +44,7 @@ module Piv
     File.open path, 'w' do |f|
       f.puts content
     end unless File.exist? path
-    system "subl #{path}"
+    edit path
   end
 
   def license
