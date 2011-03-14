@@ -2,25 +2,19 @@
 
 $: << File.dirname(__FILE__)+'/../lib'
 
-require 'yaml'
+require 'piv/generator'
 
-unless File.exist? '.piv'
-  require 'piv'
-  include Piv
-  generate_project ARGV.shift, ARGV.shift
+piv = Piv::Generator.load
+
+unless piv.configured?
+  piv.generate_project ARGV.shift, *ARGV
   exit
-end
-
-config = YAML.load_file '.piv'
-config['flavours'].each do |flavour|
-  require "piv/#{flavour}"
-  include Piv.const_get flavour.classify
 end
 
 generator = ARGV.shift
 method_name = "generate_#{generator}"
-unless respond_to? method_name
+unless piv.respond_to? method_name
    puts "Unknown generator #{generator}"
    exit 1  
 end
-self.send method_name, *ARGV 
+piv.send method_name, *ARGV 
