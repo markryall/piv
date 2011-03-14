@@ -7,7 +7,9 @@ module Piv::WatirSoluble
   	directory 'conf'
     directory 'features' do
     	directory 'support' do
-    		file 'env.rb'
+    		file 'env.rb', <<EOF
+require 'rspec/expectations'
+EOF
     	end
     end
     generate_app name
@@ -22,6 +24,7 @@ source 'http://rubygems.org'
 gem 'cucumber'
 gem 'watir-webdriver'
 gem 'nokogiri'
+gem 'rspec-expectations'
 EOF
   end
 
