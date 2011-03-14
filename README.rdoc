@@ -23,9 +23,9 @@ if PIV_EDITOR is not set, it will default to 'subl' (sublime text 2)
 
 == ruby flavour
 
-  piv ruby foo
+  piv foo ruby
 
-this will create a foo ruby project together with the standard folders and files that i'd usually create for a ruby project
+this will create a ruby project called foo consisting of the standard folders and files that i'd usually create for a ruby project
 
 once you've generated a ruby project you can use various generators within the project
 
@@ -64,6 +64,5 @@ the generate_* methods of the Piv::Clojure module will then be able to create va
 == future plans
 
 * add ~/.pivrc with name, email, etc.
-* add gem related commands for ruby flavour
 * add other flavours (clojure? python? make up a whole new language?)
 * write some damn specs
