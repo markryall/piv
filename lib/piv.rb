@@ -50,6 +50,10 @@ module Piv
     edit path
   end
 
+  def file_content source, name
+    FileUtils.cp File.dirname(source)+'/content/'+name, '.'
+  end
+
   def license
 <<EOF
 Copyright (c) #{Date.today.year} YOUR NAME
