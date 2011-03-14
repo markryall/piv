@@ -3,13 +3,27 @@ require 'piv'
 module Piv::Ruby
   include Piv
 
-  def generate_init *ignored
-    directory 'lib'
-    directory 'spec'
+  def init_ruby name
+    directory "lib/#{name}"
+    directory 'spec' do
+      directory name
+      file 'spec_helper.rb'
+    end
     file '.gemtest'
     file 'Rakefile'
-    file 'Gemfile'
-    file 'README.rdoc'
+    file 'Gemfile', <<EOF
+source 'http://rubygems.org'
+gem 'rspec'
+EOF
+    file 'README.rdoc', <<EOF
+= #{name}
+
+a THING
+
+== rationale
+
+* because THINGS are just better this way
+EOF
     file 'HISTORY.rdoc'
     file 'MIT-LICENSE', license
   end

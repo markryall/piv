@@ -20,14 +20,17 @@ module Piv
     system "#{editor} #{path}"
   end
 
-  def generate_project flavour, name
-    directory name do |dir|
-      dir.file '.gitignore'
-      dir.file '.piv', {'flavour' => flavour}.to_yaml
+  def generate_project name, *flavours
+    directory name do
       system 'git init' unless File.exist? '.git'
-      require 'piv/'+flavour
-      extend Piv.const_get flavour.classify
-      generate_init name if respond_to? :generate_init
+      file '.gitignore'
+      file '.piv', {'flavours' => flavours}.to_yaml
+      flavours.each do |flavour|
+        require 'piv/'+flavour
+        extend Piv.const_get flavour.classify
+        initialiser = "init_#{flavour}".to_sym
+        send(initialiser, name) if respond_to? initialiser
+      end
     end
     edit name
   end
@@ -36,7 +39,7 @@ module Piv
     full_path = File.join path
     mkdir_p File.join full_path
     Dir.chdir full_path do
-      yield self if block_given?
+      yield if block_given?
     end
   end
 

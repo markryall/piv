@@ -1,1 +1,3 @@
-flavour: 'ruby'
+--- 
+flavours: 
+- ruby

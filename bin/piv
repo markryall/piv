@@ -12,8 +12,10 @@ unless File.exist? '.piv'
 end
 
 config = YAML.load_file '.piv'
-require 'piv/'+config['flavour']
-include Piv.const_get config['flavour'].classify
+config['flavours'].each do |flavour|
+  require "piv/#{flavour}"
+  include Piv.const_get flavour.classify
+end
 
 generator = ARGV.shift
 method_name = "generate_#{generator}"

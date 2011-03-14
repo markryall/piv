@@ -13,17 +13,25 @@ a simple and extensible command line file generator
 
 == usage
 
+  piv <project name> *<flavour>
+
+this command will create a new project with the specified 'flavours' (project types)
+
+all files created by the generator will immediately be opened in the text editor specified by the PIV_EDITOR environment variable
+
+if PIV_EDITOR is not set, it will default to 'subl' (sublime text 2)
+
+== ruby flavour
+
   piv ruby foo
 
 this will create a foo ruby project together with the standard folders and files that i'd usually create for a ruby project
 
-== ruby flavour
-
-once you've generated a ruby project you can use various generators
+once you've generated a ruby project you can use various generators within the project
 
   piv class foo bar baz
 
-this will create a Foo::Bar::Baz class, an associated spec and open both in a text editor (hardcoded to sublime text 2 at the moment)
+this will create a Foo::Bar::Baz class, an associated spec and open both in a text editor
 
   piv module foo bar baz
 
@@ -33,9 +41,29 @@ this will create a module instead of a class and a spec and open both in a text 
 
 this will destroy Foo::Bar::Baz (and any associated files)
 
+  piv gem blast_furnace
+
+this will create a gemspec for a gem called blast_furnace and open it in a text editor
+
+== piv flavour
+
+this flavour creates a gem that can be used as a piv flavour
+
+  piv piv clojure
+
+this will create a basic template for a new clojure flavour
+
+once installed, this gem can be used as a project generator:
+
+  piv clojure my_clojure_project
+
+the generate_* methods of the Piv::Clojure module will then be able to create various things:
+
+  piv class foo
+
 == future plans
 
+* add ~/.pivrc with name, email, etc.
 * add gem related commands for ruby flavour
 * add other flavours (clojure? python? make up a whole new language?)
-* editor should be configurable
 * write some damn specs
