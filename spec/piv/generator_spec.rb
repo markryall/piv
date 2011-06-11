@@ -27,4 +27,25 @@ describe Piv::Generator do
   it 'should not be configured when given no configuration' do
     Piv::Generator.new.should_not be_configured
   end
+
+  it 'should mix in each configured flavour' do
+    in_temp_directory do
+      write_file <<EOF, 'piv', 'module_a.rb'
+module Piv::ModuleA
+  def module_a_method
+  end
+end
+EOF
+      write_file <<EOF, 'piv', 'module_b.rb'
+module Piv::ModuleB
+  def module_b_method
+  end
+end
+EOF
+      $: << '.'
+      generator = Piv::Generator.new 'flavours' => ['module_a', 'module_b']
+      generator.should respond_to :module_a_method
+      generator.should respond_to :module_b_method
+    end
+  end
 end
