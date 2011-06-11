@@ -3,35 +3,20 @@ require 'piv/ruby'
 
 describe Piv::Ruby do
   include Piv::Ruby
+  include FileSystem
 
-  before do
-    @stack = []
-    @directories = []
-    @files = []
-  end
-
-  def directory name
-    @stack.push name
-    @directories << @stack.join('/')
-    yield if block_given?
-    @stack.pop
-  end
-
-  def file name, content=nil
-    path = [*@stack, name].join('/')
-    @files << (content ? [path, content] : path)
-  end
+  before { init_filesystem }
 
   describe '#init_ruby' do
     it 'should create files and directories' do
       stub!(:license).and_return 'a license'
       init_ruby 'project_name'
-      @directories.should == [
+      directories.should == [
         'lib/project_name',
         'spec',
         'spec/project_name'
       ]
-      @files.should == [
+      files.should == [
         'spec/spec_helper.rb',
         '.gemtest',
         'Rakefile',
