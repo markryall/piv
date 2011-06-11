@@ -6,5 +6,5 @@ end
 
 desc 'execute specifications'
 task :test do
-  sh 'rspec spec'
+  sh 'bundle exec rspec spec'
 end
