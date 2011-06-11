@@ -74,7 +74,7 @@ EOF
     end
     directory ['spec', *dirs] do |dir|
       dir.file "#{name}_spec.rb", <<EOF
-describe #{names.classify}
+describe #{names.classify} do
   it 'should ...'
 end
 EOF

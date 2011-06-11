@@ -6,7 +6,7 @@ class Piv::Generator
 
   def self.load
     return Piv::Generator.new unless File.exist? '.piv'
-    generator = Piv::Generator.new YAML.load_file '.piv'
+    Piv::Generator.new YAML.load_file '.piv'
   end
 
   def initialize config={}
