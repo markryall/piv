@@ -19,4 +19,12 @@ describe Piv::Generator do
       Piv::Generator.load.should == generator
     end
   end
+
+  it 'should be configured when given configuration' do
+    Piv::Generator.new(:a => 1).should be_configured
+  end
+
+  it 'should not be configured when given no configuration' do
+    Piv::Generator.new.should_not be_configured
+  end
 end
