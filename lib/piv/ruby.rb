@@ -66,14 +66,14 @@ end
 private
   def generate_ruby thing, names
     name, dirs = names.last, names.slice(0...-1)
-    directory ['lib', *dirs] do |dir|
-      dir.file "#{name}.rb", <<EOF
+    directory ['lib', *dirs] do
+      file "#{name}.rb", <<EOF
 #{thing} #{names.classify}
 end
 EOF
     end
-    directory ['spec', *dirs] do |dir|
-      dir.file "#{name}_spec.rb", <<EOF
+    directory ['spec', *dirs] do
+      file "#{name}_spec.rb", <<EOF
 describe #{names.classify} do
   it 'should ...'
 end
