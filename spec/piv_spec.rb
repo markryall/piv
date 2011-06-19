@@ -13,10 +13,11 @@ describe Piv do
   end
 
   it 'should generate a license' do
+    Piv.stub!(:preferences).and_return 'name' => 'Piv User Name'
     Date.stub_chain(:today, :year).and_return 2055
     license.should == <<EOF
-Copyright (c) 2055 YOUR NAME
- 
+Copyright (c) 2055 Piv User Name
+
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 "Software"), to deal in the Software without restriction, including

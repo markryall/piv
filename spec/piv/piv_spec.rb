@@ -19,7 +19,8 @@ describe Piv::Piv do
         'spec/piv'
       ]
       files.should == [
-        'spec/spec_helper.rb',
+        ['.rvmrc', "rvm use 1.9.2@project_name --create\n"],
+        ['spec/spec_helper.rb', "$: << File.expand_path('../../lib', __FILE__)\n\nrequire 'rspec'\n"],
         '.gemtest',
         'Rakefile',
         ['Gemfile', "source 'http://rubygems.org'\ngem 'rspec'\n"],
