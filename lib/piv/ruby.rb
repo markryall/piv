@@ -4,6 +4,9 @@ module Piv::Ruby
   include Piv
 
   def init_ruby name
+    file '.rvmrc', <<EOF
+rvm use 1.9.2@#{name} --create
+EOF
     directory "lib/#{name}"
     directory 'spec' do
       directory name
@@ -46,7 +49,8 @@ EOF
   end
 
   def generate_gem name
-    file 'gemspec', %{
+    file '.gemtest'
+    file "#{name}.gemspec", %{
 Gem::Specification.new do |spec|
   spec.name = '#{name}'
   spec.version = '0.0.1'
@@ -61,7 +65,6 @@ EOF
   spec.executables << 'EXECUTABLE'
 
   spec.add_development_dependency 'rake', '~>0.8'
-  spec.add_development_dependency 'gemesis', '~>0'
   spec.add_development_dependency 'rspec', '~>2'
 end
 }
