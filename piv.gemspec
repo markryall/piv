@@ -12,6 +12,8 @@ EOF
   spec.files = Dir['lib/**/*'] + Dir['spec/**/*'] + Dir['bin/*'] + ['README.rdoc', 'MIT-LICENSE', 'HISTORY.rdoc', 'Rakefile', '.gemtest']
   spec.executables << 'piv'
 
+  spec.add_dependency 'rainbow', '~>1.1'
+
   spec.add_development_dependency 'rake', '~>0.8'
   spec.add_development_dependency 'rspec', '~>2'
 end

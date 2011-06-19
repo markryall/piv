@@ -63,6 +63,8 @@ the generate_* methods of the Piv::Clojure module will then be able to create va
 
 == future plans
 
-* add ~/.pivrc with name, email, etc.
+* move most of the bin script into a cli class
+* add ~/.pivrc management (with name, email, etc.)
+* complete specs on ruby
+* create a gem flavour (rather than generator method in ruby flavour)
 * add other flavours (clojure? python? make up a whole new language?)
-* write some damn specs

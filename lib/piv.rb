@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'rainbow'
 
 class String
   def classify
@@ -44,9 +45,12 @@ module Piv
   end
 
   def file path, content=''
-    File.open path, 'w' do |f|
-      f.puts content
-    end unless File.exist? path
+    if File.exist? path
+      puts '✔'.foreground(:green) + " #{File.join Dir.pwd, path}"
+    else
+      puts '✘'.foreground(:red) + " #{File.join Dir.pwd, path}"
+      File.open(path, 'w') { |f| f.puts content }
+    end 
     edit path
   end
 

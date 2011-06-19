@@ -74,6 +74,9 @@ EOF
     end
     directory ['spec', *dirs] do
       file "#{name}_spec.rb", <<EOF
+require_relative '#{'../'*dirs.size}spec_helper'
+require '#{names.join '/'}'
+
 describe #{names.classify} do
   it 'should ...'
 end

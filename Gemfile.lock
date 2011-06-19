@@ -2,11 +2,13 @@ PATH
   remote: .
   specs:
     piv (0.0.1)
+      rainbow (~> 1.1)
 
 GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.2)
+    rainbow (1.1.1)
     rake (0.8.7)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)

@@ -38,4 +38,9 @@ EOF
       ]
     end
   end
+
+  it 'should create ruby files'
+  it 'should destroy ruby class files'
+  it 'should destroy ruby module files'
+  it 'should generate gems'
 end
