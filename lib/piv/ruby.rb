@@ -58,9 +58,9 @@ Gem::Specification.new do |spec|
   spec.description = <<-EOF
 DESCRIPTION
 EOF
-  spec.authors << 'YOUR NAME'
-  spec.email = 'YOUR EMAIL'
-  spec.homepage = 'http://HOMEPAGE'
+  spec.authors << '#{Piv.preferences['name']}'
+  spec.email = '#{Piv.preferences['email']}'
+  spec.homepage = 'http://github.com/#{Piv.preferences['github_account']}/#{name}'
   spec.files = Dir['lib/**/*'] + Dir['spec/**/*'] + Dir['bin/*'] + ['README.rdoc', 'MIT-LICENSE', 'HISTORY.rdoc', 'Rakefile', '.gemtest']
   spec.executables << 'EXECUTABLE'
 

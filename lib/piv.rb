@@ -1,21 +1,17 @@
 # coding: utf-8
 require 'fileutils'
 require 'rainbow'
-
-class String
-  def classify
-    self.split('_').map(&:capitalize).join
-  end
-end
-
-class Array
-  def classify
-    self.map(&:classify).join('::')
-  end
-end
+require 'piv/preferences'
+require 'piv/monkey_violence'
 
 module Piv
+  @preferences = Preferences.new
+
   include FileUtils
+
+  def self.preferences
+    @preferences
+  end
 
   def edit path
     editor = ENV['PIV_EDITOR'] || 'subl'
@@ -61,8 +57,8 @@ module Piv
 
   def license
 <<EOF
-Copyright (c) #{Date.today.year} YOUR NAME
- 
+Copyright (c) #{Date.today.year} #{Piv.preferences['name']}
+
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 "Software"), to deal in the Software without restriction, including
