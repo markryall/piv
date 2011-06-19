@@ -7,7 +7,11 @@ module Piv::Ruby
     directory "lib/#{name}"
     directory 'spec' do
       directory name
-      file 'spec_helper.rb'
+      file 'spec_helper.rb', <<EOF
+$: << File.expand_path('../../lib', __FILE__)
+
+require 'rspec'
+EOF
     end
     file '.gemtest'
     file 'Rakefile'
