@@ -14,6 +14,6 @@ EOF
 
   spec.add_dependency 'rainbow', '~>1.1'
 
-  spec.add_development_dependency 'rake', '~>0.8'
+  spec.add_development_dependency 'rake', '~>0'
   spec.add_development_dependency 'rspec', '~>2'
 end
